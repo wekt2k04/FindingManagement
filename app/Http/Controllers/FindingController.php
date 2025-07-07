@@ -3,18 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage; // NEW: Import the Storage facade
 
 class FindingController extends Controller
 {
     public function index()
     {
-        // Defines sample data to pass to the view
-        $sampleFinding = [
-            "severity" => "High",
-            "account" => "AWS_Account_123",
-            "service" => "S3",
-            "rule_name" => "Public S3 Bucket"
-        ];
-        return view('findings', compact('sampleFinding'));
+        // Read the JSON file content from storage/app
+        $findingsJson = Storage::disk('local')->get('findings.json');
+
+        // Decode the JSON string into a PHP array
+        $findings = json_decode($findingsJson, true); // `true` converts objects to associative arrays
+
+        // Pass the entire array of findings to the view
+        return view('findings', compact('findings'));
     }
 }

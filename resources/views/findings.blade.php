@@ -3,20 +3,19 @@
   <head>
     <title>CSPM Findings</title>
   </head>
-  <body>
-    <h1>Current Findings</h1>
+  <body class="bg-gray-100 p-6">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-3x1 font-bold text-gray-800 mb-6">CSPM Findings List</h1>
+    </div>
 
-    @php
-      // Temporary mock data for Week 1 deliverable
-      $sampleFinding = [
-        "severity" => "High",
-        "account" => "AWS_Account_123",
-        "service" => "S3",
-        "rule_name" => "Public S3 Bucket"
-      ];
-    @endphp
+    <x-filter-bar /> {{-- NEW : filter bar component --}}
 
-    <x-finding-row :finding="$sampleFinding" />
-    
+    <div class="finding-list space-y-4"> {{-- Added vertical space between findings --}}
+      @forelse ($findings as $finding)
+        <x-finding-row :finding="$finding" />
+      @empty
+        <p class="text-gray-600 text-center">No findings to display</p>
+      @endforelse
+    </div>    
   </body>
 </html>
