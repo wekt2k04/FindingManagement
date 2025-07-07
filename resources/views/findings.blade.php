@@ -6,17 +6,14 @@
   <body>
     <h1>Current Findings</h1>
 
-    @php
-      // Temporary mock data for Week 1 deliverable
-      $sampleFinding = [
-        "severity" => "High",
-        "account" => "AWS_Account_123",
-        "service" => "S3",
-        "rule_name" => "Public S3 Bucket"
-      ];
-    @endphp
-
-    <x-finding-row :finding="$sampleFinding" />
+    @foreach ($findings as $finding)
+      <div>
+        <h3>Severity : {{ $finding['severity'] }}</h3>
+        <p>Account: {{ $finding['account'] }}</p>
+        <p>Service: {{ $finding['service'] }}</p>
+        <p>Rule Name : {{ $finding['rule_name'] }}</p>
+      </div>
+    @endforeach
     
   </body>
 </html>

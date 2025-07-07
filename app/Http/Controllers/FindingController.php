@@ -8,13 +8,11 @@ class FindingController extends Controller
 {
     public function index()
     {
-        // Defines sample data to pass to the view
-        $sampleFinding = [
-            "severity" => "High",
-            "account" => "AWS_Account_123",
-            "service" => "S3",
-            "rule_name" => "Public S3 Bucket"
-        ];
-        return view('findings', compact('sampleFinding'));
+        // Lire le contenu du fichier JSON
+        $json = file_get_contents(storage_path('app/findings.json'));
+        // Décoder le JSON en tableau associatif
+        $findings = json_decode($json, true);
+
+        return view('findings', compact('findings'));
     }
 }
