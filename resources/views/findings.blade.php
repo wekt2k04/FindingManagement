@@ -19,14 +19,23 @@
         <x-filter-bar />
         
 
-        <div class="findings-list space-y-3"> {{-- space-y-3 pour space-y-4 (Bootstrap utilise des espacements légèrement différents) --}}
+        <div id="findings-list" class="findings-list space-y-3"> {{-- space-y-3 pour space-y-4 (Bootstrap utilise des espacements légèrement différents) --}}
             @forelse ($findings as $finding)
-                {{-- Le composant finding-row (déjà converti en Bootstrap) --}}
-                <x-finding-row :finding="$finding" />
+            {{-- Le composant finding-row (déjà converti en Bootstrap) --}}
+            <x-finding-row :finding="$finding" />
             @empty
-                <p class="text-muted text-center">No findings to display</p> {{-- text-muted pour text-gray-600 --}}
+            <p class="text-muted text-center">No findings to display</p> {{-- text-muted pour text-gray-600 --}}
             @endforelse
         </div>
+
+        <script>
+            window.addEventListener('beforeunload', function () {
+            const findingsDiv = document.getElementById('findings-list');
+            if (findingsDiv) {
+                findingsDiv.innerHTML = '';
+            }
+            });
+        </script>
     </div>
 
     {{-- Bootstrap JS (via CDN) - requis pour certaines fonctionnalités interactives de Bootstrap --}}
