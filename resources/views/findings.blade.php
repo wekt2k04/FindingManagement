@@ -16,7 +16,8 @@
         <h1 class="display-5 fw-bold text-dark mb-4">CSPM Findings List</h1> {{-- display-5 pour text-3xl, fw-bold pour font-bold, text-dark pour text-gray-800, mb-4 pour mb-6 --}}
         
         {{-- Le composant filter-bar (déjà converti en Bootstrap) --}}
-        <x-filter-bar /> 
+        <x-filter-bar />
+        
 
         <div class="findings-list space-y-3"> {{-- space-y-3 pour space-y-4 (Bootstrap utilise des espacements légèrement différents) --}}
             @forelse ($findings as $finding)
